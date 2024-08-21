@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/image-url": "^1.0.2",
     "aws-sdk": "^2.1679.0",
     "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
     "framer-motion": "^11.3.28",
     "next": "14.2.5",
+    "next-sanity": "^9.4.7",
     "radix-ui": "^1.0.1",
     "react": "^18",
     "react-dom": "^18",
