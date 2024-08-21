@@ -3,17 +3,17 @@ import BlogArticle from '@/app/components/blog/BlogArticle';
 
 export const revalidate = 1;
 
-export async function generateMetadata({ params: { slug } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
     const query = `*[_type == "blog" && slug.current == $slug] {
         title,
         image,
         snippet
     }[0]`;
 
-    const data = await client.fetch(query, { slug });
+    const data = await client.fetch(query, { slug: params.slug });
 
     if (!data) {
-        console.error(`No data found for slug: ${slug}`);
+        console.error(`No data found for slug: ${params.slug}`);
         return {
             title: 'Blog Post Not Found',
             description: 'No description available',
@@ -26,7 +26,6 @@ export async function generateMetadata({ params: { slug } }) {
         image: data.image,
     };
 }
-
 
 async function getData(slug: string) {
     const postQuery = `*[_type == "blog" && slug.current == $slug] {
@@ -52,11 +51,11 @@ async function getData(slug: string) {
     return { data, recentData };
 }
 
-export default async function BlogArticlePage({ params: { slug } }) {
-    const { data, recentData } = await getData(slug);
+export default async function BlogArticlePage({ params }: { params: { slug: string } }) {
+    const { data, recentData } = await getData(params.slug);
 
     if (!data) {
-        return <div>No blog post found for slug: {slug}</div>;
+        return <div>No blog post found for slug: {params.slug}</div>;
     }
 
     return (
@@ -65,4 +64,3 @@ export default async function BlogArticlePage({ params: { slug } }) {
         </>
     );
 }
-
