@@ -30,12 +30,20 @@ const experiences = [
 
 ];
 
+import Image from 'next/image';
+
 const Experience = () => (
     <div className="mt-12">
         <h3 className="text-3xl font-bold mb-4">Experience</h3>
         {experiences.map((exp, index) => (
             <div key={index} className="flex items-start mb-8">
-                <img src={`/assets/${exp.logo}`} alt={`${exp.company} Logo`} className="w-16 h-auto mr-4" />
+                <Image
+                    src={`/assets/${exp.logo}`}
+                    alt={`${exp.company} Logo`}
+                    width={64} // adjust as needed
+                    height={64} // adjust as needed
+                    className="w-16 h-auto mr-4"
+                />
                 <div>
                     <h4 className="text-2xl font-semibold">{exp.title} at {exp.company} - {exp.location}</h4>
                     <ul className="list-disc ml-5 mt-2">
@@ -50,3 +58,4 @@ const Experience = () => (
 );
 
 export default Experience;
+

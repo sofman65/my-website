@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import { FaRegLightbulb, FaProjectDiagram, FaClipboardList } from "react-icons/fa"; // Example icons
+
 const skillLevels = {
     Python: 100,
     Postgresql: 100,
@@ -12,8 +15,6 @@ const skillLevels = {
     Docker: 100,
 };
 
-import { FaRegLightbulb, FaProjectDiagram, FaClipboardList } from "react-icons/fa"; // Example icons
-
 const AboutMeSkills = () => (
     <div className="mt-12">
         <h3 className="text-3xl font-bold mb-4">Technical Skills</h3>
@@ -21,10 +22,12 @@ const AboutMeSkills = () => (
             {Object.entries(skillLevels).map(([skill, level]) => (
                 <li key={skill} className="flex items-center">
                     <div className="flex-shrink-0">
-                        <img
-                            src={`assets/${skill}.png`}
+                        <Image
+                            src={`/assets/${skill}.png`}
                             alt={`${skill.charAt(0).toUpperCase() + skill.slice(1)} Logo`}
-                            className="w-10 h-10 object-contain" // Ensure the image fits within the container
+                            width={40} // adjust as needed
+                            height={40} // adjust as needed
+                            className="w-10 h-10 object-contain"
                         />
                     </div>
                     <div className="w-full ml-4">

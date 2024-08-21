@@ -34,7 +34,7 @@ function NavBar() {
                                     onClick={() => setNavbar(!navbar)}
                                 >
                                     {navbar ? (
-                                        <Image src="/close.svg" width={30} height={30} alt="close menu" />
+                                        <Image src="assets/close.svg" width={30} height={30} alt="close menu" />
                                     ) : (
                                         <Image
                                             src="assets/hamburger-menu.svg"

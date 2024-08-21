@@ -84,3 +84,6 @@ export default async function Blog() {
         </>
     );
 }
+
+
+// FIX THIS GODAMN SCRIPT
