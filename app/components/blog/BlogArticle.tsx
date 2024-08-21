@@ -46,7 +46,7 @@ export default function BlogArticle({ data, recentData }: { data: any, recentDat
         return (
             <div className="flex flex-col items-center justify-center min-h-screen">
                 <h1 className="text-3xl font-bold text-red-500">No blog post found</h1>
-                <p>The blog post you're looking for does not exist or may have been removed.</p>
+                <p>The blog post you&apos;re looking for does not exist or may have been removed.</p>
             </div>
         );
     }

@@ -13,8 +13,8 @@ export default function QuoteSection() {
                     Simplicity is the Key to Elegance
                 </h1>
                 <p className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl font-normal text-neutral-300 max-w-lg text-center mx-auto">
-                    "In both code and design, simplicity brings clarity and elegance.
-                    My approach is to create solutions that are not only powerful but also beautifully simple."
+                    &quot;In both code and design, simplicity brings clarity and elegance.
+                    My approach is to create solutions that are not only powerful but also beautifully simple.&quot;
                 </p>
             </div>
         </div>

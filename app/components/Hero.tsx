@@ -2,6 +2,7 @@ import GetStarted from "./GBHLogo";
 import styles from "../styles/styles";
 import SocialMediaLinks from "./SocialMediaLinks";
 import GbH_Logo from "./GBHLogo";
+import Image from 'next/image'; // Import the Image component from 'next/image'
 
 const Hero = () => {
 
@@ -39,14 +40,18 @@ const Hero = () => {
                     I am a versatile Full Stack Engineer with a strong foundation in AI/ML. Check out my latest projects in Machine Learning, Data Science, and Full Stack Development.
                 </p>
             </div>
+
+
             <div className="relative flex-1 flex flex-col items-center justify-center md:my-0 my-10">
-                <img
+                <Image
                     src={'/sofianos-hero.png'}
                     alt="sofianos-hero"
+                    width={400} // adjust the width as needed
+                    height={400} // adjust the height as needed
                     className="w-full max-w-[300px] md:max-w-[400px] h-auto object-contain rounded-md"
                 />
-
             </div>
+
 
 
             <div className={`ss:hidden ${styles.flexCenter}`}>
