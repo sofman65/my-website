@@ -1,19 +1,23 @@
-import { FaInstagram, FaTiktok, FaYoutube, FaLinkedin } from "react-icons/fa";
+import React from "react";
+import { FaLinkedin, FaGithub, FaYoutube, FaInstagram, FaTiktok } from "react-icons/fa";
 
 const SocialMediaLinks = () => {
     return (
-        <div className="flex justify-center space-x-6 mt-4">
-            <a href="https://www.instagram.com/sof_lam" target="_blank" rel="noopener noreferrer">
-                <FaInstagram className="text-white text-3xl hover:text-pink-500" />
+        <div className="flex space-x-4 text-lg md:text-2xl">
+            <a href="https://www.linkedin.com/in/sofianoslampropoulos" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-500">
+                <FaLinkedin />
             </a>
-            <a href="https://www.tiktok.com/@ygeneratedbyhumans" target="_blank" rel="noopener noreferrer">
-                <FaTiktok className="text-white text-3xl hover:text-black" />
+            <a href="https://github.com/sofman65" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-500">
+                <FaGithub />
             </a>
-            <a href="https://www.youtube.com/channel/yourchannelid" target="_blank" rel="noopener noreferrer">
-                <FaYoutube className="text-white text-3xl hover:text-red-600" />
+            <a href="https://www.youtube.com/user/yourchannel" target="_blank" rel="noopener noreferrer" className="text-white hover:text-red-500">
+                <FaYoutube />
             </a>
-            <a href="https://www.linkedin.com/in/sofianos-lampropoulos" target="_blank" rel="noopener noreferrer">
-                <FaLinkedin className="text-white text-3xl hover:text-blue-600" />
+            <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-white hover:text-pink-500">
+                <FaInstagram />
+            </a>
+            <a href="https://www.tiktok.com/@yourprofile" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-500">
+                <FaTiktok />
             </a>
         </div>
     );

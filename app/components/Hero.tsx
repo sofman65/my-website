@@ -44,11 +44,7 @@ const Hero = () => {
                     alt="sofianos-hero"
                     className="w-full max-w-[300px] md:max-w-[400px] h-auto object-contain rounded-md"
                 />
-                <div className="absolute z-[10] flex justify-center items-center pt-[80%] md:pt-[110%]">
-                    <div className="w-[120px] h-[120px] rounded-full bg-opacity-40 flex justify-center items-center">
-                        <SocialMediaLinks />
-                    </div>
-                </div>
+
             </div>
 
 
