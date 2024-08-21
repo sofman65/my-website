@@ -37,7 +37,7 @@ function NavBar() {
                                         <Image src="/close.svg" width={30} height={30} alt="close menu" />
                                     ) : (
                                         <Image
-                                            src="/hamburger-menu.svg"
+                                            src="assets/hamburger-menu.svg"
                                             width={30}
                                             height={30}
                                             alt="open menu"

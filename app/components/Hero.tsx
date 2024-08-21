@@ -1,6 +1,7 @@
-import GetStarted from "./GetStarted";
+import GetStarted from "./GBHLogo";
 import styles from "../styles/styles";
 import SocialMediaLinks from "./SocialMediaLinks";
+import GbH_Logo from "./GBHLogo";
 
 const Hero = () => {
 
@@ -27,7 +28,7 @@ const Hero = () => {
                         <span className={`${text_gradient}`}>Lampropoulos</span>{" "}
                     </h1>
                     <div className="ss:flex hidden md:mr-4 mr-0">
-                        <GetStarted />
+                        <GbH_Logo />
                     </div>
                 </div>
 
@@ -49,7 +50,7 @@ const Hero = () => {
 
 
             <div className={`ss:hidden ${styles.flexCenter}`}>
-                <GetStarted />
+                <GbH_Logo />
             </div>
         </section>
     );

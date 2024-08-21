@@ -1,5 +1,6 @@
 import React from "react";
 import SocialMediaLinks from "@/app/components/SocialMediaLinks"; // Ensure this path is correct
+import Link from "next/link"; // Import the Link component from Next.js
 
 const Footer = () => {
     return (
@@ -12,6 +13,12 @@ const Footer = () => {
                     </p>
                     <p className="text-xs text-gray-400 mt-2">
                         © {new Date().getFullYear()} Sofianos Lampropoulos. All Rights Reserved.
+                    </p>
+                    {/* Add the Privacy Policy link here */}
+                    <p className="text-xs text-gray-400 mt-2 hover:underline">
+                        <Link href="/privacy-policy">
+                            Privacy Policy
+                        </Link>
                     </p>
                 </div>
                 <div className="flex space-x-6 justify-center md:justify-start">

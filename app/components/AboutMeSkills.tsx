@@ -22,7 +22,7 @@ const AboutMeSkills = () => (
                 <li key={skill} className="flex items-center">
                     <div className="flex-shrink-0">
                         <img
-                            src={`/${skill}.png`}
+                            src={`assets/${skill}.png`}
                             alt={`${skill.charAt(0).toUpperCase() + skill.slice(1)} Logo`}
                             className="w-10 h-10 object-contain" // Ensure the image fits within the container
                         />

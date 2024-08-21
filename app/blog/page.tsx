@@ -32,13 +32,13 @@ export default async function Blog() {
             <div className="z-[-1] blog-gradient w-full h-full fixed"></div>
             <div className="px-20 flex gap-4 justify-center items-center md:justify-start">
                 {/* <Logo /> */}
-                <div className="relative pt-20">
+                <div className="relative pt-30">
                     <TypewriterEffectContainer />
                 </div>
 
             </div>
             <div className="grid place-content-center place-items-center grid-cols-1 min-h-[90vh] lg:grid-cols-2 2xl:grid-cols-3 py-16">
-                {data.map((blog, idx) => {
+                {data.map((blog: any, idx: number) => {
                     let day = new Date(blog.publishedAt).toLocaleDateString("el-GR", {
                         day: "numeric",
                     });
