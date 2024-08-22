@@ -1,5 +1,5 @@
 import React from "react";
-import { Spotlight } from "@/app/components/ui/Spotlight";
+import { Spotlight } from "@/app/custom_components/ui/Spotlight";
 
 export default function QuoteSection() {
     return (

@@ -1,5 +1,5 @@
 import { client } from '@/lib/sanity';
-import BlogArticle from '@/app/components/blog/BlogArticle';
+import BlogArticle from '@/app/custom_components/blog/BlogArticle';
 
 export const revalidate = 1;
 

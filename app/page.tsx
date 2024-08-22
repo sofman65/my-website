@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-import Hero from "./components/Hero";
-import AboutMe from "./components/AboutMe";
-import ContactComp from "./components/ContactComp";
-import QuoteSection from "./components/QuoteSection";
+import Hero from "./custom_components/Hero";
+import AboutMe from "./custom_components/AboutMe";
+import ContactComp from "./custom_components/ContactComp";
+import QuoteSection from "./custom_components/QuoteSection";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

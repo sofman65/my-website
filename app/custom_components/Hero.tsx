@@ -4,12 +4,13 @@ import SocialMediaLinks from "./SocialMediaLinks";
 import GbH_Logo from "./GBHLogo";
 import Image from 'next/image'; // Import the Image component from 'next/image'
 
+
 const Hero = () => {
 
-    const pink_gradiant = 'bg-gradient-to-r from-pink-300 to-pink-600 filter blur-[900px]'
-    const white_gradiant = 'bg-white bg-opacity-60 filter blur-[750px]'
-    const blue_gradiant = 'bg-gradient-to-t from-transparent via-blue-800 to-transparent filter blur-[123px]'
-    const bg_highlight_gradient = 'bg-gradient-to-tr from-gray-700 to-indigo-900'
+    // const pink_gradiant = 'bg-gradient-to-r from-pink-300 to-pink-600 filter blur-[900px]'
+    // const white_gradiant = 'bg-white bg-opacity-60 filter blur-[750px]'
+    // const blue_gradiant = 'bg-gradient-to-t from-transparent via-blue-800 to-transparent filter blur-[123px]'
+    // const bg_highlight_gradient = 'bg-gradient-to-tr from-gray-700 to-indigo-900'
     const text_gradient = ' bg-gradient-to-br from-indigo-400 via-blue-500 to-teal-400 text-transparent bg-clip-text'
 
     return (
@@ -39,6 +40,7 @@ const Hero = () => {
                 <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
                     I am a versatile Full Stack Engineer with a strong foundation in AI/ML. Check out my latest projects in Machine Learning, Data Science, and Full Stack Development.
                 </p>
+
             </div>
 
 
@@ -56,7 +58,9 @@ const Hero = () => {
 
             <div className={`ss:hidden ${styles.flexCenter}`}>
                 <GbH_Logo />
+
             </div>
+
         </section>
     );
 };

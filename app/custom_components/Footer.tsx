@@ -1,5 +1,5 @@
 import React from "react";
-import SocialMediaLinks from "@/app/components/SocialMediaLinks"; // Ensure this path is correct
+import SocialMediaLinks from "@/app/custom_components/SocialMediaLinks"; // Ensure this path is correct
 import Link from "next/link"; // Import the Link component from Next.js
 
 const Footer = () => {

@@ -1,7 +1,7 @@
 import { client, urlFor } from "@/lib/sanity";
 import Link from "next/link";
 import Image from "next/image";
-import { TypewriterEffectContainer } from "@/app/components/TypewriterEffectContainer";
+import { TypewriterEffectContainer } from "@/app/custom_components/TypewriterEffectContainer";
 import * as React from "react";
 // import { Logo } from "@/components/Logo";
 

@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { AspectRatio } from "@/app/components/ui/aspect-ratio";
+import { AspectRatio } from "@/app/custom_components/ui/aspect-ratio";
 import { PortableText } from "next-sanity";
 import { urlFor } from "@/lib/sanity";
 import { format } from "date-fns";
 import { el } from "date-fns/locale";
-import { DotBackground } from "@/app/components/ui/dotBackground";
-import { TracingBeam } from "@/app/components/ui/tracing-beam";
-import SocialMediaShare from "@/app/components/blog/SocialMediaShare";
-import FeaturedVideos from "@/app/components/blog/FeaturedVideos";
-import RecentArticles from "@/app/components/blog/RecentArticles";
+import { DotBackground } from "@/app/custom_components/ui/dotBackground";
+import { TracingBeam } from "@/app/custom_components/ui/tracing-beam";
+import SocialMediaShare from "@/app/custom_components/blog/SocialMediaShare";
+import FeaturedVideos from "@/app/custom_components/blog/FeaturedVideos";
+import RecentArticles from "@/app/custom_components/blog/RecentArticles";
 
 export const revalidate = 60;
 

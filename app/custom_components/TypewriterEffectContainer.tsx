@@ -1,5 +1,5 @@
 "use client";
-import { TypewriterEffect } from "@/app/components/ui/typewriter-effect";
+import { TypewriterEffect } from "@/app/custom_components/ui/typewriter-effect";
 
 export function TypewriterEffectContainer() {
     const words = [

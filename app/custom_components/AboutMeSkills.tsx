@@ -2,16 +2,16 @@ import Image from 'next/image';
 import { FaRegLightbulb, FaProjectDiagram, FaClipboardList } from "react-icons/fa"; // Example icons
 
 const skillLevels = {
-    Python: 100,
+    python: 100,
     Postgresql: 100,
-    Node: 100,
+    node: 100,
     React: 100,
-    Git: 100,
-    Tensorflow: 100,
-    Pytorch: 100,
+    git: 100,
+    tensorflow: 100,
+    pytorch: 100,
     Pandas: 100,
     Numpy: 100,
-    Matplotlib: 100,
+    matplotlib: 100,
     Docker: 100,
 };
 
