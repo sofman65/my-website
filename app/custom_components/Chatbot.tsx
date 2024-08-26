@@ -8,60 +8,24 @@ import { Button } from "@/components/ui/button";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import materialDark from "react-syntax-highlighter/dist/esm/styles/prism/material-dark";
+import TypingIndicator from "./TypingIndicator";
+import QuickReplies from "./QuickReplies";
+
+// Define the type for a quick reply
+type QuickReply = {
+  id: string;
+  label: string;
+  value: string;
+};
 
 // Define the type for a conversation message
 type ConversationMessage = {
   id: string;
   role: "user" | "bot";
   display: string;
-  quickReplies?: { id: string; label: string; value: string }[];
+  quickReplies?: QuickReply[];
 };
-
-
-// Quick Replies Component
-const QuickReplies = ({ options, onSelect }) => (
-  <div className="flex gap-2 mt-2">
-    {options.map((option) => (
-      <Button
-        key={option.id}
-        variant="outline"
-        size="sm"
-        onClick={() => onSelect(option.value)}
-      >
-        {option.label}
-      </Button>
-    ))}
-  </div>
-);
-
-// Typing Indicator Component
-const TypingIndicator = () => (
-  <div className="flex items-center gap-2">
-    <div className="dot-flashing"></div>
-    <span className="text-sm text-gray-500">Typing...</span>
-    <style jsx>{`
-      .dot-flashing {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #000;
-        animation: dot-flashing 1s infinite linear alternate;
-        animation-delay: 0.5s;
-      }
-
-      @keyframes dot-flashing {
-        0% {
-          background-color: #000;
-        }
-        50%,
-        100% {
-          background-color: #ccc;
-        }
-      }
-    `}</style>
-  </div>
-);
 
 export default function Chatbot() {
   const [input, setInput] = useState("");
@@ -79,8 +43,10 @@ export default function Chatbot() {
     }
   }, [conversation]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
+    if (event) {
+      event.preventDefault();
+    }
     setIsLoading(true);
 
     setConversation((currentConversation) => [
@@ -113,7 +79,7 @@ export default function Chatbot() {
         result += decoder.decode(value);
       }
 
-      // Example: Adding quick replies to the bot's response
+      // Adding quick replies to the bot's response
       setConversation((currentConversation) => [
         ...currentConversation,
         {
@@ -140,10 +106,13 @@ export default function Chatbot() {
 
   const handleQuickReply = async (value: string) => {
     setInput(value);
-    handleSubmit(new Event("submit"));
+    handleSubmit(); // Call without an event
   };
+  const customStyle: { [key: string]: React.CSSProperties } = materialDark;
 
   return (
+
+
     <div className={isDarkMode ? "dark" : ""}>
       <div
         className="fixed bottom-12 right-12 z-50 cursor-pointer"
@@ -154,12 +123,6 @@ export default function Chatbot() {
           <AvatarFallback className="text-black dark:text-white">SL</AvatarFallback>
         </Avatar>
       </div>
-
-      {/* <div className="fixed top-12 right-12 z-50">
-        <Button onClick={() => setIsDarkMode(!isDarkMode)}>
-          Toggle {isDarkMode ? "Light" : "Dark"} Mode
-        </Button>
-      </div> */}
 
       {isChatbotVisible && (
         <div className="fixed bottom-36 w-full lg:w-1/2 2xl:w-4/12 right-0 px-4 lg:px-12 z-50">
@@ -216,9 +179,11 @@ export default function Chatbot() {
                             code({ node, className, children, ...props }) {
                               const match = /language-(\w+)/.exec(className || "");
                               return match ? (
+
+
                                 <SyntaxHighlighter
-                                  style={materialDark}
-                                  language={match[1]}
+                                  style={customStyle}
+                                  language={match ? match[1] : undefined}
                                   PreTag="div"
                                   {...props}
                                 >
