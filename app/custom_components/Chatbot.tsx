@@ -49,6 +49,7 @@ export default function Chatbot() {
     }
     setIsLoading(true);
 
+    // Add the user's message to the conversation
     setConversation((currentConversation) => [
       ...currentConversation,
       { id: nanoid(), role: "user", display: input },
@@ -71,27 +72,49 @@ export default function Chatbot() {
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
-      let result = "";
+      let botMessageId = nanoid();
+
+      // Add an initial bot message to the conversation
+      setConversation((currentConversation) => [
+        ...currentConversation,
+        {
+          id: botMessageId,
+          role: "bot",
+          display: "",  // Start with an empty string and update it as chunks come in
+        },
+      ]);
+
+      let currentDisplay = "";
 
       while (true) {
         const { done, value } = await reader?.read()!;
         if (done) break;
-        result += decoder.decode(value);
+        currentDisplay += decoder.decode(value);
+
+        // Update the bot's message progressively
+        setConversation((currentConversation) =>
+          currentConversation.map((message) =>
+            message.id === botMessageId
+              ? { ...message, display: currentDisplay }
+              : message
+          )
+        );
       }
 
-      // Adding quick replies to the bot's response
-      setConversation((currentConversation) => [
-        ...currentConversation,
-        {
-          id: nanoid(),
-          role: "bot",
-          display: result,
-          quickReplies: [
-            { id: nanoid(), label: "Tell me more", value: "Tell me more" },
-            { id: nanoid(), label: "Another example", value: "Another example" },
-          ],
-        },
-      ]);
+      // Add quick replies after the final message
+      setConversation((currentConversation) =>
+        currentConversation.map((message) =>
+          message.id === botMessageId
+            ? {
+              ...message,
+              quickReplies: [
+                { id: nanoid(), label: "Tell me more", value: "Tell me more" },
+                { id: nanoid(), label: "Another example", value: "Another example" },
+              ],
+            }
+            : message
+        )
+      );
     } catch (error) {
       console.error("Error fetching response from API:", error);
       setConversation((currentConversation) => [

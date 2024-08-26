@@ -2,7 +2,7 @@
 const TypingIndicator = () => (
     <div className="flex items-center gap-2">
         <div className="dot-flashing"></div>
-        <span className="text-sm text-gray-500">Typing...</span>
+        <span className="text-sm text-white">Typing...</span>
         <style jsx>{`
         .dot-flashing {
           width: 8px;

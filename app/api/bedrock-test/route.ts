@@ -1,8 +1,16 @@
 import { NextResponse, NextRequest } from "next/server";
 import { BedrockRuntimeClient, InvokeModelWithResponseStreamCommand } from "@aws-sdk/client-bedrock-runtime";
+import { ComprehendClient, DetectSentimentCommand } from "@aws-sdk/client-comprehend";
 
-// Define the system prompt
-const systemPrompt = "You are a helpful assistant.";
+// Define the system prompt with your professional details
+const systemPrompt = `
+You are a helpful assistant for Sofianos. 
+If someone asks about his experience, skills, or availability, provide detailed responses based on the following:
+- Experience: Application Developer at Nexi Greece, Data Engineer Intern at Oliveex, etc.
+- Skills: Python, React, Node, etc.
+- Education: Electrical and Computer Engineering, GPA: 7.63/10.
+- Availability: Currently open to new opportunities.
+`;
 
 const bannedWords = ["inappropriateWord1", "inappropriateWord2"];
 
@@ -19,6 +27,13 @@ function moderateContent(input: string): string {
     return input;
 }
 
+async function detectNegativeSentiment(input: string): Promise<boolean> {
+    const client = new ComprehendClient({ region: "us-east-1" });
+    const command = new DetectSentimentCommand({ Text: input, LanguageCode: "en" });
+    const response = await client.send(command);
+    return response.Sentiment === "NEGATIVE";
+}
+
 export async function POST(req: NextRequest) {
     const client = new BedrockRuntimeClient({ region: "us-east-1" });
 
@@ -32,7 +47,12 @@ export async function POST(req: NextRequest) {
             return new NextResponse(moderatedInput, { status: 400 });
         }
 
-        const modelId = "anthropic.claude-3-haiku-20240307-v1:0";
+        // Check for negative sentiment
+        if (await detectNegativeSentiment(moderatedInput)) {
+            return new NextResponse("Please avoid negative or inappropriate content.", { status: 400 });
+        }
+
+        const modelId = process.env.MODEL_ID ?? "anthropic.claude-3-haiku-20240307-v1:0";
 
         const payload = {
             anthropic_version: "bedrock-2023-05-31",
@@ -58,13 +78,14 @@ export async function POST(req: NextRequest) {
                     if (response.body) {
                         for await (const item of response.body) {
                             const chunk = item.chunk ? JSON.parse(new TextDecoder().decode(item.chunk.bytes)) : null;
-                            if (chunk.type === "content_block_delta") {
+                            if (chunk?.type === "content_block_delta") {
                                 const text = chunk.delta.text;
                                 completeMessage += text;
                                 controller.enqueue(text);
                             }
                         }
                     }
+                    controller.close();
 
                 } catch (err) {
                     console.error("Error during streaming:", err);
