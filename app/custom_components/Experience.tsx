@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const experiences = [
     {
         company: "Nexi Greece",
@@ -27,26 +29,25 @@ const experiences = [
             "Utilized Git for version control and collaboration."
         ]
     }
-
 ];
-
-import Image from 'next/image';
 
 const Experience = () => (
     <div className="mt-12">
         <h3 className="text-3xl font-bold mb-4">Experience</h3>
         {experiences.map((exp, index) => (
-            <div key={index} className="flex items-start mb-8">
-                <Image
-                    src={`/assets/${exp.logo}`}
-                    alt={`${exp.company} Logo`}
-                    width={64} // adjust as needed
-                    height={64} // adjust as needed
-                    className="w-16 h-auto mr-4"
-                />
-                <div>
-                    <h4 className="text-2xl font-semibold">{exp.title} at {exp.company} - {exp.location}</h4>
-                    <ul className="list-disc ml-5 mt-2">
+            <div key={index} className="flex flex-col md:flex-row items-start mb-8">
+                <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-4">
+                    <Image
+                        src={`/assets/${exp.logo}`}
+                        alt={`${exp.company} Logo`}
+                        width={64} // adjust as needed
+                        height={64} // adjust as needed
+                        className="w-16 h-16 md:w-16 md:h-auto"
+                    />
+                </div>
+                <div className="flex-1">
+                    <h4 className="text-xl md:text-2xl font-semibold">{exp.title} at {exp.company} - {exp.location}</h4>
+                    <ul className="list-disc ml-5 mt-2 space-y-1">
                         {exp.responsibilities.map((resp, idx) => (
                             <li key={idx}>{resp}</li>
                         ))}
@@ -58,4 +59,3 @@ const Experience = () => (
 );
 
 export default Experience;
-

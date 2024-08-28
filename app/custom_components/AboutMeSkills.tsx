@@ -3,25 +3,25 @@ import { FaRegLightbulb, FaProjectDiagram, FaClipboardList } from "react-icons/f
 
 const skillLevels = {
     python: 100,
-    Postgresql: 100,
+    postgresql: 100,
     node: 100,
-    React: 100,
+    react: 100,
     git: 100,
     tensorflow: 100,
     pytorch: 100,
-    Pandas: 100,
-    Numpy: 100,
+    pandas: 100,
+    numpy: 100,
     matplotlib: 100,
-    Docker: 100,
+    docker: 100,
 };
 
 const AboutMeSkills = () => (
     <div className="mt-12">
         <h3 className="text-3xl font-bold mb-4">Technical Skills</h3>
-        <ul className="grid grid-cols-2 gap-6">
+        <ul className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4">
             {Object.entries(skillLevels).map(([skill, level]) => (
-                <li key={skill} className="flex items-center">
-                    <div className="flex-shrink-0">
+                <li key={skill} className="flex flex-col items-center">
+                    <div className="flex-shrink-0 mb-2">
                         <Image
                             src={`/assets/${skill}.png`}
                             alt={`${skill.charAt(0).toUpperCase() + skill.slice(1)} Logo`}
@@ -30,7 +30,7 @@ const AboutMeSkills = () => (
                             className="w-10 h-10 object-contain"
                         />
                     </div>
-                    <div className="w-full ml-4">
+                    <div className="w-full text-center">
                         <span className="block font-semibold">{skill.charAt(0).toUpperCase() + skill.slice(1)}</span>
                         <div className="w-full bg-gray-800 h-2 mt-1 rounded">
                             <div

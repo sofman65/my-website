@@ -27,10 +27,19 @@ function moderateContent(input: string): string {
     return input;
 }
 
-async function detectNegativeSentiment(input: string): Promise<boolean> {
-    const client = new ComprehendClient({ region: "us-east-1" });
-    const command = new DetectSentimentCommand({ Text: input, LanguageCode: "en" });
-    const response = await client.send(command);
+async function detectNegativeSentiment(text: string): Promise<boolean> {
+    if (!text || text.trim().length === 0) {
+        console.error("Text is empty or invalid, skipping sentiment analysis.");
+        return false;
+    }
+
+    const comprehendClient = new ComprehendClient({ region: "us-east-1" });
+    const command = new DetectSentimentCommand({
+        Text: text,
+        LanguageCode: "en",
+    });
+
+    const response = await comprehendClient.send(command);
     return response.Sentiment === "NEGATIVE";
 }
 
@@ -39,7 +48,19 @@ export async function POST(req: NextRequest) {
 
     try {
         const data = await req.json();
-        const userInput = sanitizeInput(data.userInput);
+        let userInput = sanitizeInput(data.userInput);
+
+        // Ensure userInput is not empty
+        if (!userInput || userInput.trim().length === 0) {
+            return new NextResponse("Input cannot be empty", { status: 400 });
+        }
+
+        // Perform sentiment analysis to detect any negative sentiment
+        const isNegativeSentiment = await detectNegativeSentiment(userInput);
+        if (isNegativeSentiment) {
+            return new NextResponse("Input contains negative sentiment", { status: 400 });
+        }
+
         const moderatedInput = moderateContent(userInput);
 
         // If moderation flagged the input, return immediately
@@ -47,12 +68,7 @@ export async function POST(req: NextRequest) {
             return new NextResponse(moderatedInput, { status: 400 });
         }
 
-        // Check for negative sentiment
-        if (await detectNegativeSentiment(moderatedInput)) {
-            return new NextResponse("Please avoid negative or inappropriate content.", { status: 400 });
-        }
-
-        const modelId = process.env.MODEL_ID ?? "anthropic.claude-3-haiku-20240307-v1:0";
+        const modelId = "anthropic.claude-3-haiku-20240307-v1:0";
 
         const payload = {
             anthropic_version: "bedrock-2023-05-31",
@@ -78,15 +94,13 @@ export async function POST(req: NextRequest) {
                     if (response.body) {
                         for await (const item of response.body) {
                             const chunk = item.chunk ? JSON.parse(new TextDecoder().decode(item.chunk.bytes)) : null;
-                            if (chunk?.type === "content_block_delta") {
+                            if (chunk && chunk.type === "content_block_delta") {
                                 const text = chunk.delta.text;
                                 completeMessage += text;
                                 controller.enqueue(text);
                             }
                         }
                     }
-                    controller.close();
-
                 } catch (err) {
                     console.error("Error during streaming:", err);
                     controller.error(err);

@@ -12,7 +12,7 @@ type QuickRepliesProps = {
 };
 
 const QuickReplies = ({ options, onSelect }: QuickRepliesProps) => (
-    <div className="flex gap-2 mt-2">
+    <div className="flex gap-2 mb-2 ">
         {options.map((option) => (
             <Button
                 key={option.id}

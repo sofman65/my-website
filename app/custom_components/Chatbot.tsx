@@ -10,33 +10,53 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import materialDark from "react-syntax-highlighter/dist/esm/styles/prism/material-dark";
 import TypingIndicator from "./TypingIndicator";
-import QuickReplies from "./QuickReplies";
 
-// Define the type for a quick reply
-type QuickReply = {
-  id: string;
-  label: string;
-  value: string;
-};
+import rehypeRaw from 'rehype-raw';
 
-// Define the type for a conversation message
 type ConversationMessage = {
   id: string;
   role: "user" | "bot";
   display: string;
-  quickReplies?: QuickReply[];
 };
+
+const initialMessage = `
+## Welcome to Sofianos' AI Chatbot! 🤖
+
+To get started, you'll need to set up your environment variables.
+
+### Here's how:
+1. **Create a \`.env\` file** in the root directory of your project.
+2. Add the following variables:
+
+\`\`\`bash
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_REGION=your_aws_region
+ANTHROPIC_MODEL_ID=your_anthropic_model_id
+\`\`\`
+
+3. Once done, **refresh the page** and start chatting!
+
+---
+
+**Don't have an AWS account?** No worries! You can create one for free and use the free tier services to experiment. Have fun! 😄
+`;
 
 export default function Chatbot() {
   const [input, setInput] = useState("");
-  const [conversation, setConversation] = useState<ConversationMessage[]>([]);
+  const [conversation, setConversation] = useState<ConversationMessage[]>([
+    {
+      id: nanoid(),
+      role: "bot",
+      display: initialMessage,
+    },
+  ]);
   const [isChatbotVisible, setIsChatbotVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const conversationEndRef = useRef<HTMLDivElement | null>(null);
 
-  // Scroll to bottom when a new message is added
   useEffect(() => {
     if (conversationEndRef.current) {
       conversationEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -49,13 +69,16 @@ export default function Chatbot() {
     }
     setIsLoading(true);
 
-    // Add the user's message to the conversation
     setConversation((currentConversation) => [
       ...currentConversation,
       { id: nanoid(), role: "user", display: input },
     ]);
 
     try {
+      if (!process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID) {
+        throw new Error("Environment variables are not configured.");
+      }
+
       const response = await fetch("/api/bedrock-test", {
         method: "POST",
         headers: {
@@ -74,13 +97,12 @@ export default function Chatbot() {
       const decoder = new TextDecoder();
       let botMessageId = nanoid();
 
-      // Add an initial bot message to the conversation
       setConversation((currentConversation) => [
         ...currentConversation,
         {
           id: botMessageId,
           role: "bot",
-          display: "",  // Start with an empty string and update it as chunks come in
+          display: "", // Start with an empty string and update it as chunks come in
         },
       ]);
 
@@ -91,7 +113,6 @@ export default function Chatbot() {
         if (done) break;
         currentDisplay += decoder.decode(value);
 
-        // Update the bot's message progressively
         setConversation((currentConversation) =>
           currentConversation.map((message) =>
             message.id === botMessageId
@@ -101,20 +122,6 @@ export default function Chatbot() {
         );
       }
 
-      // Add quick replies after the final message
-      setConversation((currentConversation) =>
-        currentConversation.map((message) =>
-          message.id === botMessageId
-            ? {
-              ...message,
-              quickReplies: [
-                { id: nanoid(), label: "Tell me more", value: "Tell me more" },
-                { id: nanoid(), label: "Another example", value: "Another example" },
-              ],
-            }
-            : message
-        )
-      );
     } catch (error) {
       console.error("Error fetching response from API:", error);
       setConversation((currentConversation) => [
@@ -127,15 +134,9 @@ export default function Chatbot() {
     }
   };
 
-  const handleQuickReply = async (value: string) => {
-    setInput(value);
-    handleSubmit(); // Call without an event
-  };
   const customStyle: { [key: string]: React.CSSProperties } = materialDark;
 
   return (
-
-
     <div className={isDarkMode ? "dark" : ""}>
       <div
         className="fixed bottom-12 right-12 z-50 cursor-pointer"
@@ -198,12 +199,11 @@ export default function Chatbot() {
                         <ReactMarkdown
                           className="prose prose-sm dark:prose-dark"
                           remarkPlugins={[remarkGfm]}
+                          rehypePlugins={[rehypeRaw]}
                           components={{
                             code({ node, className, children, ...props }) {
                               const match = /language-(\w+)/.exec(className || "");
                               return match ? (
-
-
                                 <SyntaxHighlighter
                                   style={customStyle}
                                   language={match ? match[1] : undefined}
@@ -222,14 +222,6 @@ export default function Chatbot() {
                         >
                           {message.display}
                         </ReactMarkdown>
-
-                        {/* Render Quick Replies if available */}
-                        {message.quickReplies && (
-                          <QuickReplies
-                            options={message.quickReplies}
-                            onSelect={handleQuickReply}
-                          />
-                        )}
                       </div>
                     </div>
                   ))}
