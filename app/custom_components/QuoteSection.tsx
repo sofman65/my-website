@@ -3,7 +3,7 @@ import { Spotlight } from "@/app/custom_components/ui/Spotlight";
 
 export default function QuoteSection() {
     return (
-        <div className="h-[40rem] w-full rounded-md flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
+        <div className="h-[20rem] w-full rounded-md flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
             <Spotlight
                 className="-top-40 left-0 md:left-60 md:-top-20"
                 fill="white"
@@ -13,7 +13,7 @@ export default function QuoteSection() {
                     Simplicity is the Key to Elegance
                 </h1>
                 <p className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl font-normal text-neutral-300 max-w-lg text-center mx-auto">
-                    &quot;In both code and design, simplicity brings clarity and elegance.
+                    &quot;
                     My approach is to create solutions that are not only powerful but also beautifully simple.&quot;
                 </p>
             </div>
