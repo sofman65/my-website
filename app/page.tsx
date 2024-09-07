@@ -11,7 +11,7 @@ export default function Home() {
       <Hero />
       <AboutMe />
       <ContactComp />
-      <QuoteSection />  {/* Add the Quote section here */}
+      <QuoteSection />
     </main>
   );
 }
