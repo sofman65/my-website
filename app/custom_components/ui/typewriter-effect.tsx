@@ -42,7 +42,7 @@ export const TypewriterEffect = ({
                 }
             );
         }
-    }, [isInView]);
+    }, [isInView, animate]); // Προσθέστε το 'animate' εδώ
 
     const renderWords = () => {
         return (

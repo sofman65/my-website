@@ -49,7 +49,7 @@ const PrivacyPolicy = () => {
             <p><strong>Effective date:</strong> August 21, 2024</p>
             <p><strong>Last updated:</strong> August 21, 2024</p>
             <p>
-                This Privacy Policy outlines the policies and practices regarding the collection, use, and protection of your personal information when you visit and interact with my website at <a href="https://www.space-slam.com/">https://main.d2maainag7y13x.amplifyapp.com/</a> (the “Website”).
+                This Privacy Policy outlines the policies and practices regarding the collection, use, and protection of your personal information when you visit and interact with my website at <a href="https://www.space-slam.com/">https://main.d2maainag7y13x.amplifyapp.com/</a> (the &ldquo;Website&rdquo;).
             </p>
 
             <h2>Information We Collect</h2>
@@ -74,7 +74,7 @@ const PrivacyPolicy = () => {
 
             <h2>Cookies</h2>
             <p>
-                The Website may use "cookies" to enhance your experience. You can choose to set your web browser to refuse cookies or to alert you when cookies are being sent. Please note that some parts of the Website may not function properly if cookies are disabled.
+                The Website may use &ldquo;cookies&rdquo; to enhance your experience. You can choose to set your web browser to refuse cookies or to alert you when cookies are being sent. Please note that some parts of the Website may not function properly if cookies are disabled.
             </p>
 
             <h2>Data Security</h2>

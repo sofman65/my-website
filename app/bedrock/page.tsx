@@ -37,7 +37,7 @@ export default function BedrockTestPage() {
                 setResponse(result);
             }
         } catch (error) {
-            setResponse("Error: " + error.message);
+            setResponse("Error: " + (error instanceof Error ? error.message : String(error)));
         } finally {
             setLoading(false);
         }
