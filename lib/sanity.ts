@@ -1,4 +1,8 @@
-import { createClient } from 'next-sanity'
+import {
+    createClient,
+    type ClientConfig,
+    type QueryParams,
+} from "@sanity/client";
 import imageUrlBuilder from '@sanity/image-url'
 
 export const client = createClient({
@@ -12,4 +16,19 @@ const builder = imageUrlBuilder(client)
 
 export function urlFor(source: any) {
     return builder.image(source)
+}
+
+export async function sanityFetch<QueryResponse>({
+    query,
+    qParams = {},
+    tags,
+}: {
+    query: string;
+    qParams?: QueryParams;
+    tags: string[];
+}): Promise<QueryResponse> {
+    return client.fetch<QueryResponse>(query, qParams, {
+        cache: "force-cache",
+        next: { tags },
+    });
 }
