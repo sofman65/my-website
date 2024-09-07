@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import materialDark from "react-syntax-highlighter/dist/esm/styles/prism/material-dark";
 import TypingIndicator from "./TypingIndicator";
+import PrismTheme from 'react-syntax-highlighter';
 
 import rehypeRaw from 'rehype-raw';
 
@@ -134,7 +135,7 @@ export default function Chatbot() {
     }
   };
 
-  const customStyle: { [key: string]: React.CSSProperties } = materialDark;
+  // const customStyle: PrismTheme = materialDark;
 
   return (
     <div className={isDarkMode ? "dark" : ""}>
@@ -185,7 +186,7 @@ export default function Chatbot() {
                         <Avatar>
                           <AvatarImage
                             alt="Chatbot"
-                            src="/placeholder-image.webp"
+                            src="assets/placeholder-image.webp"
                           />
                           <AvatarFallback>SL</AvatarFallback>
                         </Avatar>
@@ -201,14 +202,14 @@ export default function Chatbot() {
                           remarkPlugins={[remarkGfm]}
                           rehypePlugins={[rehypeRaw]}
                           components={{
-                            code({ node, className, children, ...props }) {
+                            code({ node, inline, className, children, ...props }: any) {
                               const match = /language-(\w+)/.exec(className || "");
-                              return match ? (
+                              return !inline && match ? (
                                 <SyntaxHighlighter
-                                  style={customStyle}
-                                  language={match ? match[1] : undefined}
+                                  {...props as any}
+                                  // style={customStyle as any}
+                                  language={match[1]}
                                   PreTag="div"
-                                  {...props}
                                 >
                                   {String(children).replace(/\n$/, "")}
                                 </SyntaxHighlighter>

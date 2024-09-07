@@ -11,6 +11,10 @@ const PrivacyPolicyContainer = styled.div`
   line-height: 1.6;
   color: #333;
 
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
   h1 {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -45,7 +49,7 @@ const PrivacyPolicy = () => {
             <p><strong>Effective date:</strong> August 21, 2024</p>
             <p><strong>Last updated:</strong> August 21, 2024</p>
             <p>
-                This Privacy Policy outlines the policies and practices regarding the collection, use, and protection of your personal information when you visit and interact with my website at <a href="https://main.d2maainag7y13x.amplifyapp.com/">https://main.d2maainag7y13x.amplifyapp.com/</a> (the “Website”).
+                This Privacy Policy outlines the policies and practices regarding the collection, use, and protection of your personal information when you visit and interact with my website at <a href="https://www.space-slam.com/">https://main.d2maainag7y13x.amplifyapp.com/</a> (the “Website”).
             </p>
 
             <h2>Information We Collect</h2>
@@ -95,7 +99,7 @@ const PrivacyPolicy = () => {
 
             <h2>Contact Information</h2>
             <p>
-                If you have any questions or concerns about this Privacy Policy or the handling of your personal information, please contact me at [Your Contact Information].
+                If you have any questions or concerns about this Privacy Policy or the handling of your personal information, please contact me at sofianos.lampropoulos@gmail.com
             </p>
         </PrivacyPolicyContainer>
     );
