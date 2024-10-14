@@ -10,7 +10,7 @@ const navItems = [
   { href: '/projects', label: 'Projects' },
   { href: '/about-me', label: 'About Me' },
   { href: '/consulting', label: 'Consulting' },
-  { href: '/newsletter-signup', label: 'Newsletter Signup' },
+
 ];
 
 const aiToolsItems = [

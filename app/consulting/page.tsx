@@ -2,13 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Meteors } from "../custom_components/ui/meteors";
 import { Button } from "@/components/ui/button";
 import { Calendar } from 'lucide-react';
 
 const ConsultingPage = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <Meteors number={20} />
       
       <motion.div
@@ -17,7 +18,7 @@ const ConsultingPage = () => {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto text-center"
       >
-        <h1 className="text-4xl sm:text-5xl font-bold mb-6 font-orbitron">
+        <h1 className="mt-12 text-4xl sm:text-5xl font-bold mb-6 font-orbitron">
           1:1 AI Coaching & Consulting
         </h1>
         <p className="text-xl mb-12">
@@ -74,10 +75,14 @@ const ConsultingPage = () => {
         className="mt-16 text-center"
       >
         <h2 className="text-3xl font-bold mb-6 font-orbitron">Ready to Transform Your AI Journey?</h2>
-        <Button size="lg" className="bg-green-600 hover:bg-green-700">
-          Schedule Your Consultation
-        </Button>
+        
+        <Link href="/schedule" passHref>
+          <Button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-gray-700 bg-gray-800 bg-[length:200%_100%] px-6 font-medium text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50">
+            Schedule a Session
+          </Button>
+        </Link>
       </motion.div>
+      {/* <ConsultingTextEffect /> */}
     </div>
   );
 };

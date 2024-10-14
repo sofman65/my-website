@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { PortableText } from "next-sanity";
+import { PortableText, PortableTextReactComponents } from "next-sanity";
 import { urlFor } from "@/lib/sanity";
 import { format } from "date-fns";
 import { el } from "date-fns/locale";
@@ -14,10 +14,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { ptComponents } from './ptComponents'; 
+import { CodeBlock } from "./CodeBlock";
 
 export const revalidate = 60;
 
-export default function BlogArticle({ data, recentData, ptComponents }: { data: any, recentData: any[], ptComponents: any }) {
+export default function BlogArticle({ data, recentData }: { data: any, recentData: any[] }) {
     const [aspectRatio, setAspectRatio] = useState(16 / 9);
 
     useEffect(() => {
@@ -53,7 +57,7 @@ export default function BlogArticle({ data, recentData, ptComponents }: { data: 
     const formattedDate = format(publishedDate, "dd MMMM yyyy", { locale: el }) || "Unknown Date";
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white">
+        <div className="min-h-screen text-white font-sans">
             <div className="relative w-full" style={{ aspectRatio: aspectRatio }}>
                 <Image
                     src={urlFor(data.image).url()}
@@ -83,7 +87,10 @@ export default function BlogArticle({ data, recentData, ptComponents }: { data: 
                         <div className="bg-gray-800 rounded-lg shadow-xl p-8">
                             <SocialMediaShare url={`https://www.spaceslam.com/blog/${data.slug}`} />
                             <div className="prose prose-invert max-w-none">
-                                <PortableText value={data.content} components={ptComponents} />
+                                <PortableText
+                                    value={data.content}
+                                    components={ptComponents as unknown as PortableTextReactComponents} 
+                                />
                             </div>
                         </div>
                     </TracingBeam>
@@ -111,43 +118,5 @@ export default function BlogArticle({ data, recentData, ptComponents }: { data: 
     );
 }
 
-const CodeBlock = ({ language, value }: { language: string; value: string }) => {
-    return (
-        <pre className="bg-gray-700 p-4 rounded-lg overflow-x-auto">
-            <code className="text-sm">{value}</code>
-        </pre>
-    );
-};
 
-export const ptComponents = {
-    types: {
-        code: ({ value }: { value: { language?: string; code: string } }) => {
-            if (value && value.language) {
-                return <CodeBlock language={value.language} value={value.code} />;
-            }
-            return <pre className="bg-gray-700 p-4 rounded-lg overflow-x-auto"><code className="text-sm">{value.code}</code></pre>;
-        },
-    },
-    marks: {
-        link: ({ children, value }: { children: React.ReactNode; value: { href: string } }) => {
-            return <a href={value.href} className="text-blue-400 hover:underline">{children}</a>;
-        },
-    },
-    block: {
-        h1: ({ children }: { children: React.ReactNode }) => <h1 className="text-4xl font-bold mt-8 mb-4">{children}</h1>,
-        h2: ({ children }: { children: React.ReactNode }) => <h2 className="text-3xl font-semibold mt-6 mb-3">{children}</h2>,
-        h3: ({ children }: { children: React.ReactNode }) => <h3 className="text-2xl font-semibold mt-4 mb-2">{children}</h3>,
-        normal: ({ children }: { children: React.ReactNode }) => <p className="mb-4">{children}</p>,
-        blockquote: ({ children }: { children: React.ReactNode }) => (
-            <blockquote className="border-l-4 border-blue-500 pl-4 italic my-4">{children}</blockquote>
-        ),
-    },
-    list: {
-        bullet: ({ children }: { children: React.ReactNode }) => <ul className="list-disc pl-5 mb-4">{children}</ul>,
-        number: ({ children }: { children: React.ReactNode }) => <ol className="list-decimal pl-5 mb-4">{children}</ol>,
-    },
-    listItem: {
-        bullet: ({ children }: { children: React.ReactNode }) => <li className="mb-2">{children}</li>,
-        number: ({ children }: { children: React.ReactNode }) => <li className="mb-2">{children}</li>,
-    },
-};
+

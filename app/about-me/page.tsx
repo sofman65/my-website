@@ -60,7 +60,7 @@ const AboutMePage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen  text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* <Meteors number={20} /> */}
 
       <section ref={ref} className={`max-w-7xl mx-auto ${inView ? 'animate-fade-in-up' : 'opacity-0'}`}>
@@ -90,25 +90,16 @@ const AboutMePage: React.FC = () => {
                 <div className="flex-shrink-0 mb-2">
                   <Image
                     src={`/assets/${skill}.png`}
-                    alt={`${skill.charAt(0).toUpperCase() + skill.slice(1)} Logo`}
+                    alt={skill}
                     width={40}
                     height={40}
                     className="w-10 h-10 object-contain"
                   />
                 </div>
-                <div className="w-full text-center">
-                  <span className="block font-semibold">{skill.charAt(0).toUpperCase() + skill.slice(1)}</span>
-                  <div className="w-full bg-gray-800 h-2 mt-1 rounded">
-                    <div
-                      className="bg-blue-600 h-full rounded"
-                      style={{ width: `${level}%` }}
-                    ></div>
-                  </div>
-                </div>
               </li>
             ))}
           </ul>
-        </div>
+          </div>
 
         <div className="mt-16">
           <h3 className="text-3xl font-bold mb-8">Soft Skills</h3>

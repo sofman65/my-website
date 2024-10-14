@@ -5,8 +5,8 @@ import { urlFor } from '@/lib/sanity';
 
 const RecentArticles = ({ recentData }: { recentData: any[] }) => {
     return (
-        <div className="bg-white p-8 rounded-3xl shadow-lg py-8">
-            <h1 className="text-sm text-right mb-8 text-black">⠇⠇ Recent Articles</h1>
+        <div className="bg-gray-800 border-gray-700 p-8 rounded-3xl shadow-lg py-8">
+            <h1 className="text-sm text-right mb-8 text-white">⠇⠇ Recent Articles</h1>
             <div className="flex flex-col gap-8">
                 {recentData.map((blog, idx) => (
                     <Link
