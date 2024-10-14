@@ -1,5 +1,6 @@
-import exp from "constants";
-
+"use client"
+import React from "react";
+import { HoverEffect } from "./ui/card-hover-effect";
 const projects = [
     {
         title: "Quality of Experience Prediction Trends for Live Video Streaming Events using HIVE-streaming data",
@@ -57,42 +58,19 @@ const projects = [
     },
 ];
 
-
 const ProjectsSection = () => {
     return (
-        <section id="projects" className="relative py-16 bg-gray-900 text-white overflow-hidden">
-            {/* Extended Background Graphics */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="hidden lg:block absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-30"></div>
-                <div className="hidden lg:block absolute -bottom-48 -right-48 w-[600px] h-[600px] bg-gradient-to-r from-indigo-600 to-pink-600 rounded-full opacity-30"></div>
-                <div className="hidden lg:block absolute top-1/4 right-1/2 transform translate-x-1/2 w-[400px] h-[400px] bg-gradient-to-r from-teal-400 to-blue-500 rounded-full opacity-20"></div>
-            </div>
-
-            {/* Main Content */}
+        <section id="projects" className="relative py-16 text-white overflow-hidden">
             <div className="relative max-w-6xl mx-auto px-4">
                 <h2 className="text-4xl font-bold mb-8 text-center">Projects</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projects.map((project, index) => (
-                        <div key={index} className="relative p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-                            <p className="mb-4">{project.description}</p>
-                            <p className="text-blue-400 mb-4 font-semibold">{project.tools}</p>
-                            {project.href && (
-                                <a
-                                    href={project.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-500 hover:text-blue-300 transition-colors"
-                                >
-                                    View Project
-                                </a>
-                            )}
-                        </div>
-                    ))}
-                </div>
+                <HoverEffect items={projects.map(project => ({
+                    title: project.title,
+                    description: project.description,
+                    link: project.href
+                }))} />
             </div>
         </section>
     );
-}
+};
 
 export default ProjectsSection;

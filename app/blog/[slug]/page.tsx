@@ -1,5 +1,8 @@
 import { client } from '@/lib/sanity';
 import BlogArticle from '@/app/custom_components/blog/BlogArticle';
+import { ptComponents } from '@/app/custom_components/blog/ptComponent';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export const revalidate = 1;
 
@@ -60,7 +63,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
 
     return (
         <>
-            <BlogArticle data={data} recentData={recentData} />
+            <BlogArticle data={data} recentData={recentData} ptComponents={ptComponents} />
         </>
     );
 }
