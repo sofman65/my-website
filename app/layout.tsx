@@ -7,7 +7,7 @@ import Chatbot from "./custom_components/Chatbot";
 import { orbitron } from "@/lib/fonts";
 import { ReactNode } from 'react';
 import SharedCanvas from "./custom_components/SharedCanvas";
-
+import MailchimpPopup from "./custom_components/MailchimpPopup";
 
 
 export const metadata = {
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         </div>
         <Chatbot />
-
+        <MailchimpPopup />
 
       </body>
     </html>
