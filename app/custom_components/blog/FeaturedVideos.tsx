@@ -1,4 +1,3 @@
-// components/blog/FeaturedVideos.tsx
 import React from 'react';
 
 const videos = [
@@ -16,9 +15,9 @@ const videos = [
 
 const FeaturedVideos = () => {
     return (
-        <div className="flex flex-col p-8 rounded-3xl shadow-lg bg-white w-full">
-            <h1 className="text-sm text-right mb-8">⠇⠇ Recent Content</h1>
-            <div className="VideoGallery grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="bg-gray-800 border-gray-700 p-8 rounded-3xl shadow-lg">
+            <h1 className="text-sm text-right mb-8 text-white">⠇⠇ Recent Content</h1>
+            <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
                 {videos
                     .filter(video => video.platform === 'YouTube') // Filter out non-YouTube videos
                     .map((video) => {

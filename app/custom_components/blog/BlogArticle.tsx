@@ -97,7 +97,7 @@ export default function BlogArticle({ data, recentData }: { data: any, recentDat
                     <div className="lg:w-1/3 space-y-8 lg:sticky lg:top-20 lg:self-start">
                         <Card className="bg-gray-800 border-gray-700">
                             <CardHeader>
-                                <CardTitle>Recent Articles</CardTitle>
+                                <CardTitle className="text-white">Recent Articles</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <RecentArticles recentData={recentData} />
@@ -105,7 +105,7 @@ export default function BlogArticle({ data, recentData }: { data: any, recentDat
                         </Card>
                         <Card className="bg-gray-800 border-gray-700">
                             <CardHeader>
-                                <CardTitle>Featured Videos</CardTitle>
+                                <CardTitle className="text-white">Featured Videos</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <FeaturedVideos />

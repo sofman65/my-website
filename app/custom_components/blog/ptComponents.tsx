@@ -5,16 +5,11 @@ import { urlFor } from "@/lib/sanity";
 
 export const ptComponents = {
     types: {
-        code: ({ value }: { value?: { language?: string; code: string; filename?: string; showLineNumbers?: boolean } }) => {
-            if (value && value.code) {
-                const language = value.language || 'text';
-                return <CodeBlock 
-                    codeExample={{ language: language, code: value.code}}
-                />;
-            }
-            return null;
+        code: ({ value }: { value: { language?: string; code: string } }) => {
+            return <CodeBlock codeExample={{ language: value.language || 'text', code: value.code }} />;
+
         },
-        image: ({ value }: { value?: any }) => {
+        image: ({ value }: { value?: { asset: { url: string }; alt?: string } }) => {
             if (value) {
                 return (
                     <div className="relative w-full h-64 my-4">
